@@ -3,7 +3,7 @@
 
 /**
  * counting_sort - Sorts an array of integers in ascending order
- *               using the Counting sort algorithm
+ *                 using the Counting sort algorithm
  * @array: Array of integers
  * @size: Size of the array
  */
