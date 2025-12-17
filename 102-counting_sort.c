@@ -2,122 +2,53 @@
 #include <stdlib.h>
 
 /**
- * find_max - find the maximum value in an array
- * @array: array of integers
- * @size: number of elements in array
- * Return: maximum integer in array
- */
-static int find_max(int *array, size_t size)
-{
-	size_t i;
-	int max = array[0];
-
-	for (i = 1; i < size; i++)
-		if (array[i] > max)
-			max = array[i];
-	return (max);
-}
-
-/**
- * init_count_array - allocate and initialize count array
- * @max: maximum value in array
- * Return: pointer to count array or NULL on failure
- */
-static int *init_count_array(int max)
-{
-	int *count;
-	size_t i;
-
-	count = malloc(sizeof(int) * (max + 1));
-	if (!count)
-		return (NULL);
-
-	for (i = 0; i <= (size_t)max; i++)
-		count[i] = 0;
-
-	return (count);
-}
-
-/**
- * count_elements - counts occurrences of elements
- * @array: original array
- * @size: number of elements
- * @count: counting array
- */
-static void count_elements(int *array, size_t size, int *count)
-{
-	size_t i;
-
-	for (i = 0; i < size; i++)
-		count[array[i]]++;
-}
-
-/**
- * cumulative_count - transforms count array to cumulative counts
- * @count: counting array
- * @size: size of count array
- */
-static void cumulative_count(int *count, size_t size)
-{
-	size_t i;
-
-	for (i = 1; i < size; i++)
-		count[i] += count[i - 1];
-}
-
-/**
- * build_output_array - build sorted array using count array
- * @array: original array
- * @size: number of elements
- * @count: cumulative count array
- * @output: output array
- */
-static void build_output_array(int *array, size_t size, int *count, int *output)
-{
-	size_t i;
-
-	for (i = size; i > 0; i--)
-	{
-		output[count[array[i - 1]] - 1] = array[i - 1];
-		count[array[i - 1]]--;
-	}
-}
-
-/**
- * counting_sort - sorts an array of integers using counting sort
- * @array: array of integers
- * @size: number of elements
+ * counting_sort - Sorts an array of integers in ascending order
+ *                 using the Counting sort algorithm
+ * @array: Array of integers
+ * @size: Size of the array
  */
 void counting_sort(int *array, size_t size)
 {
 	int *count, *output;
-	int max;
+	int max, i;
 
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
 
-	max = find_max(array, size);
+	max = array[0];
+	for (i = 1; i < (int)size; i++)
+		if (array[i] > max)
+			max = array[i];
 
-	count = init_count_array(max);
-	if (!count)
+	count = malloc(sizeof(int) * (max + 1));
+	if (count == NULL)
 		return;
 
-	count_elements(array, size, count);
-	cumulative_count(count, max + 1);
+	for (i = 0; i <= max; i++)
+		count[i] = 0;
 
-	/* Print counting array */
+	for (i = 0; i < (int)size; i++)
+		count[array[i]]++;
+
+	for (i = 1; i <= max; i++)
+		count[i] += count[i - 1];
+
 	print_array(count, max + 1);
 
 	output = malloc(sizeof(int) * size);
-	if (!output)
+	if (output == NULL)
 	{
 		free(count);
 		return;
 	}
 
-	build_output_array(array, size, count, output);
+	for (i = (int)size - 1; i >= 0; i--)
+	{
+		output[count[array[i]] - 1] = array[i];
+		count[array[i]]--;
+	}
 
-	for (size_t i = 0; i < size; i++)
+	for (i = 0; i < (int)size; i++)
 		array[i] = output[i];
 
 	free(count);
