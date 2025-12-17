@@ -9,25 +9,25 @@
  */
 static void sift_down(int *array, size_t size, size_t root, size_t end)
 {
-    size_t max_child, left_child;
-    int temp;
+	size_t max_child, left_child;
+	int temp;
 
-    while ((left_child = 2 * root + 1) <= end)
-    {
-        max_child = left_child;
-        if (left_child + 1 <= end && array[left_child + 1] > array[left_child])
-            max_child = left_child + 1;
+	while ((left_child = 2 * root + 1) <= end)
+	{
+		max_child = left_child;
+		if (left_child + 1 <= end && array[left_child + 1] > array[left_child])
+			max_child = left_child + 1;
 
-        if (array[root] >= array[max_child])
-            return;
+		if (array[root] >= array[max_child])
+			return;
 
-        temp = array[root];
-        array[root] = array[max_child];
-        array[max_child] = temp;
+		temp = array[root];
+		array[root] = array[max_child];
+		array[max_child] = temp;
 
-        print_array(array, size);
-        root = max_child;
-    }
+		print_array(array, size);
+		root = max_child;
+	}
 }
 
 /**
@@ -37,18 +37,18 @@ static void sift_down(int *array, size_t size, size_t root, size_t end)
  */
 static void heapify(int *array, size_t size)
 {
-    ssize_t start;
+	long start;
 
-    if (size < 2)
-        return;
+	if (size < 2)
+		return;
 
-    start = (size - 2) / 2; /* Last parent node */
+	start = (size - 2) / 2; /* Last parent node */
 
-    while (start >= 0)
-    {
-        sift_down(array, size, start, size - 1);
-        start--;
-    }
+	while (start >= 0)
+	{
+		sift_down(array, size, (size_t)start, size - 1);
+		start--;
+	}
 }
 
 /**
@@ -58,24 +58,24 @@ static void heapify(int *array, size_t size)
  */
 void heap_sort(int *array, size_t size)
 {
-    size_t end;
-    int temp;
+	size_t end;
+	int temp;
 
-    if (array == NULL || size < 2)
-        return;
+	if (array == NULL || size < 2)
+		return;
 
-    heapify(array, size);
+	heapify(array, size);
 
-    end = size - 1;
-    while (end > 0)
-    {
-        temp = array[0];
-        array[0] = array[end];
-        array[end] = temp;
+	end = size - 1;
+	while (end > 0)
+	{
+		temp = array[0];
+		array[0] = array[end];
+		array[end] = temp;
 
-        print_array(array, size);
+		print_array(array, size);
 
-        end--;
-        sift_down(array, size, 0, end);
-    }
+		end--;
+		sift_down(array, size, 0, end);
+	}
 }
