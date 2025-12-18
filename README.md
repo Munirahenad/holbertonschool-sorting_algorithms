@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # holbertonschool-sorting_algorithms
 ## Sorting Algorithms
 
@@ -61,20 +60,19 @@ By completing this project, you should be able to:
 
 ## 🧩 Data Structures
 
-### Doubly Linked List
-```c
+## Doubly Linked List
+
+This project uses a doubly linked list data structure defined as follows:
 typedef struct listint_s
 {
-	const int n;
-	struct listint_s *prev;
-	struct listint_s *next;
+    const int n;
+    struct listint_s *prev;
+    struct listint_s *next;
 } listint_t;
 
-## 👤 Authors
+## 👩‍💻 Authors
 - Munirah Enad
 - Hamsa Alammar
-
-
 
 
 
