@@ -43,3 +43,72 @@ typedef struct listint_s
     struct listint_s *next;
 } listint_t;
 
+
+	struct listint_s *prev;
+	struct listint_s *next;
+} listint_t;
+The listint_t structure is used by sorting algorithms that operate on doubly linked lists, such as Insertion Sort and Cocktail Shaker Sort.
+Each node stores an integer value and pointers to both the previous and next nodes, allowing efficient bidirectional traversal.
+
+🚀 Implemented Algorithms
+🟢 Bubble Sort
+Files: 0-bubble_sort.c, 0-O
+
+Data Structure: Array
+
+Method: Comparison
+
+Prints the array after every swap
+
+Time Complexity
+
+Best: O(n)
+
+Average: O(n²)
+
+Worst: O(n²)
+
+🟢 Insertion Sort (Doubly Linked List)
+Files: 1-insertion_sort_list.c, 1-O
+
+Swaps nodes directly
+
+Prints the list after every swap
+
+Time Complexity
+
+Best: O(n)
+
+Average: O(n²)
+
+Worst: O(n²)
+
+🟢 Selection Sort
+Files: 2-selection_sort.c, 2-O
+
+Selects the minimum element and places it in order
+
+Prints the array after every swap
+
+Time Complexity
+
+Best: O(n²)
+
+Average: O(n²)
+
+Worst: O(n²)
+
+🟢 Quick Sort (Lomuto Partition)
+Files: 3-quick_sort.c, 3-O
+
+Divide-and-conquer algorithm
+
+Prints the array after every swap
+
+Time Complexity
+
+Best: O(n log n)
+
+Average: O(n log n)
+
+Worst: O(n²)
